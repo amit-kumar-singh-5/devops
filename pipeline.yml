@@ -3,7 +3,7 @@ resources:
     - repository: template # Friendly name
       type: github # Repo type
       name: amit-kumar-singh-5/devops # Repo path
-      endpoint: AmitTerraformTesting # Service Connection for GitHub Installation Token
+      endpoint: amit-kumar-singh-5 # Service Connection for GitHub Installation Token
 
 trigger:
   - master
