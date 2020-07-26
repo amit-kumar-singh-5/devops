@@ -14,7 +14,7 @@
 #stages:
   #- template: pipeline.yml@devops
     parameters:
-      armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
+      #armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
       workingDirectory: '.'
       backendArmServiceConnection: 'AmitTerraformTesting' # Service Connection for TF backend
       backendAzureRmResourceGroupName: 'terraform'
