@@ -1,0 +1,36 @@
+resources:
+  repositories:
+    - repository: template # Friendly name
+      type: github # Repo type
+      name: amit-kumar-singh-5/devops # Repo path
+      endpoint: AmitTerraformTesting # Service Connection for GitHub Installation Token
+
+trigger:
+  - master
+
+pool:
+  name: 'Agent Pool'
+  
+stages:
+  - template: terraform-pipeline.yml@template
+    parameters:
+      armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
+      workingDirectory: '.'
+      backendArmServiceConnection: 'AmitTerraformTesting' # Service Connection for TF backend
+      backendAzureRmResourceGroupName: 'terraform'
+      backendAzureRmStorageAccountName: 'ammutfstate'
+      backendAzureRmContainerName: 'tfstate'
+      backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
+      terraformVersion: '0.12.23'
+      environments:
+      - name: 'Test'
+        displayName: 'Terraform AMMU Test'
+        armServiceConnection: 'AmitTerraformTesting'
+        backendArmServiceConnection: 'AmitTerraformTesting'
+        backendAzureRmResourceGroupName: 'terraform'
+        backendAzureRmStorageAccountName: 'ammutfstate'
+        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
+        artifactName: 'TestPlan'
+        varsFile: 'test.tfvars'
+        artifactDirectory: $(System.DefaultWorkingDirectory)
