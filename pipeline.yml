@@ -12,7 +12,7 @@
  # name: 'Azure Pipelines'
   
 stages:
-  - template: pipeline.yml@template
+  - template: pipeline.yml@devops
     parameters:
       armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
       workingDirectory: '.'
