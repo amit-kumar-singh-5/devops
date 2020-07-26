@@ -12,7 +12,7 @@ pool:
   name: 'Agent Pool'
   
 stages:
-  - template: terraform-pipeline.yml@template
+  - template: pipeline.yml@template
     parameters:
       armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
       workingDirectory: '.'
