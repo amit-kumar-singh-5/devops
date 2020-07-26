@@ -1,6 +1,6 @@
 #resources:
-  repositories:
-    - repository: template # Friendly name
+  #repositories:
+    #- repository: template # Friendly name
       type: github # Repo type
       name: amit-kumar-singh-5/devops # Repo path
       endpoint: amit-kumar-singh-5 # Service Connection for GitHub Installation Token
