@@ -9,7 +9,7 @@
  # - master
 
 pool:
-  name: 'Agent Pool'
+  name: 'Azure Pipelines'
   
 stages:
   - template: pipeline.yml@template
