@@ -1,15 +1,15 @@
 #resources:
   #repositories:
     #- repository: template # Friendly name
-      type: github # Repo type
-      name: amit-kumar-singh-5/devops # Repo path
-      endpoint: github.com_amit-kumar-singh-5 # Service Connection for GitHub Installation Token
+     # type: github # Repo type
+      # name: amit-kumar-singh-5/devops # Repo path
+      # endpoint: github.com_amit-kumar-singh-5 # Service Connection for GitHub Installation Token
 
 #trigger:
  # - master
 
-pool:
-  name: 'Azure Pipelines'
+#pool:
+ # name: 'Azure Pipelines'
   
 stages:
   - template: pipeline.yml@template
