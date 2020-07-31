@@ -4,12 +4,13 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = var.resource-group-name
-  location = "Central US""
+  name     = "amit-poc5"
+  location = "northeurope"
 }
 
 resource "azurerm_data_factory" "example" {
-  name                = var.adf-name
-  location            = "Central US"
-  resource_group_name = var.resource-group-name
+  name                = "exampleadf"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
 }
+
