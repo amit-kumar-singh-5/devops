@@ -1,36 +1,41 @@
-#resources:
-  #repositories:
-    #- repository: template # Friendly name
-     # type: github # Repo type
-      # name: amit-kumar-singh-5/devops # Repo path
-      # endpoint: github.com_amit-kumar-singh-5 # Service Connection for GitHub Installation Token
+resources:
+  repositories:
+    - repository: template # Friendly name
+      type: github # Repo type
+      name: amit-kumar-singh-5/devops # Repo path
+      endpoint: github.com_amit-kumar-singh-5 # Service Connection for GitHub Installation Token
+     
+trigger:
+  - master
 
-#trigger:
- # - master
-
-#pool:
- # name: 'Azure Pipelines'
+pool: 
+  name: 'Azure Pipelines'    
+  vmImage: 'ubuntu-20.04'
   
-#stages:
-  #- template: pipeline.yml@devops
-    parameters:
-      #armServiceConnection: 'AmitTerraformTesting' # Service Connection for azure subscription/resource group
-      workingDirectory: '.'
-      backendArmServiceConnection: 'AmitTerraformTesting' # Service Connection for TF backend
-      backendAzureRmResourceGroupName: 'terraform'
-      backendAzureRmStorageAccountName: 'ammutfstate'
-      backendAzureRmContainerName: 'tfstate'
-      backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
-      terraformVersion: '0.12.23'
-      environments:
-      - name: 'Test'
-        displayName: 'Terraform AMMU Test'
-        armServiceConnection: 'AmitTerraformTesting'
-        backendArmServiceConnection: 'AmitTerraformTesting'
-        backendAzureRmResourceGroupName: 'terraform'
-        backendAzureRmStorageAccountName: 'ammutfstate'
-        backendAzureRmContainerName: 'tfstate'
-        backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
-        artifactName: 'TestPlan'
-        varsFile: 'test.tfvars'
-        artifactDirectory: $(System.DefaultWorkingDirectory)
+steps:
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+  displayName: 'Install Terraform 0.12.3'
+  
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : azurerm init'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    backendServiceArm: 'AmitTerraformTesting'
+    backendAzureRmResourceGroupName: 'terraform'
+    backendAzureRmStorageAccountName: 'ammutfstate'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
+    
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : azurerm plan'
+  inputs:
+    command: plan
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRM: 'ADF-TestServiceConnection'
+
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : azurerm Apply'
+  inputs:
+    command: apply
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRM: 'ADF-TestServiceConnection'
