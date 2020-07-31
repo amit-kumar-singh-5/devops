@@ -31,11 +31,11 @@ steps:
   inputs:
     command: plan
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-    environmentServiceNameAzureRM: 'ADF-TestServiceConnection'
+    environmentServiceNameAzureRM: 'AmitTerraformTesting'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   displayName: 'Terraform : azurerm Apply'
   inputs:
     command: apply
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-    environmentServiceNameAzureRM: 'ADF-TestServiceConnection'
+    environmentServiceNameAzureRM: 'AmitTerraformTesting'
