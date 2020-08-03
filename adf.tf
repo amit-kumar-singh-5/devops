@@ -4,12 +4,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "amit-poc99"
+  name     = "amit-poc919"
   location = "northeurope"
 }
 
 resource "azurerm_data_factory" "example" {
-  name                = "exampleadfammu99"
+  name                = "exampleadfammu919"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 }
