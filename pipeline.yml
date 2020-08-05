@@ -33,7 +33,7 @@ steps:
     backendServiceArm: 'AmitTerraformTesting'
     backendAzureRmResourceGroupName: 'terraform'
     backendAzureRmStorageAccountName: 'ammutfstate'
-    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmContainerName: 'tfstatess'
     backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
     
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
