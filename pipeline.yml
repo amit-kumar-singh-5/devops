@@ -47,7 +47,7 @@ steps:
     backendAzureRmStorageAccountName: 'ammutfstate'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
-    varsFile: 'variables/test.tfvars'
+    varsFile: 'test.tfvars'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   displayName: 'Terraform : azurerm Apply'
