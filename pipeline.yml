@@ -42,12 +42,8 @@ steps:
     command: plan
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     environmentServiceNameAzureRM: 'AmitTerraformTesting'
-    backendServiceArm: 'AmitTerraformTesting'
-    backendAzureRmResourceGroupName: 'terraform'
-    backendAzureRmStorageAccountName: 'ammutfstate'
-    backendAzureRmContainerName: 'tfstate'
-    backendAzureRmKey: '$(Build.DefinitionName)-test.terraform.tfstate'
-    varsFile: 'test.tfvars'
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    varsFile: 'variables/prod.tfvars'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   displayName: 'Terraform : azurerm Apply'
